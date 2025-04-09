@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "./",
+    "strict": false,
+    "strictNullChecks": true,
+    "allowUnusedLabels": true,
+    "allowUnreachableCode": true,
+    "noImplicitAny": false,
+    "strictFunctionTypes": false,
+    "strictBindCallApply": false,
+    "strictPropertyInitialization": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": false,
+    "noUncheckedIndexedAccess": false,
+    "noImplicitOverride": false
+  },
+  "include": ["./**/*.test.ts", "./**/__test*"],
+  "exclude": ["node_modules", "**/docs/**", "**/build/**", "**/dist/**"]
+}

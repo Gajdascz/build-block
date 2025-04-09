@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NPM Plugin Configuration",
+  "type": "object",
+  "required": [],
+  "additionalProperties": false,
+  "properties": {
+    "contributors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Contributor name.",
+            "minLength": 1
+          },
+          "email": { "type": "string", "description": "Contributor email." },
+          "url": { "type": "string", "description": "Contributor URL." }
+        }
+      },
+      "description": "List of contributors to the plugin."
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "minLength": 5,
+      "description": "NPM package name."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "List of tags for the plugin."
+      },
+      "description": "List of tags for the plugin."
+    },
+    "url": { "type": "string", "description": "Plugin URL." }
+  }
+}

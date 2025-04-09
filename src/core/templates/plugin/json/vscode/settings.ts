@@ -1,0 +1,123 @@
+import type { ConfiguredTemplate } from '#config';
+const create = (): ConfiguredTemplate => ({
+  filename: 'settings.json',
+  relativePath: '.vscode',
+  generate: () =>
+    JSON.stringify({
+      'explorer.fileNesting.enabled': true,
+      'explorer.fileNesting.patterns': {
+        '*.ts': '${capture}.js',
+        '*.js':
+          '${capture}.js.map, ${capture}.min.js, ${capture}.d.ts, ${capture}.d.ts.map, .tsbuildinfo',
+        '*.jsx': '${capture}.js',
+        '*.tsx': '${capture}.ts',
+        'index.*': '*.${capture},*.${capture}x,*.json',
+        'package.json':
+          '.*, *.json,*.yaml,eslint*,*.config.js,*.config.ts,LICENSE'
+      },
+      'explorer.incrementalNaming': 'smart',
+      'explorer.sortOrder': 'foldersNestsFiles',
+      'typescript.preferences.organizeImports': { typeOrder: 'first' },
+      'material-icon-theme.files.associations': {
+        'tsconfig.dev.json': 'tsconfig'
+      },
+      'better-comments.multilineComments': true,
+      'better-comments.tags': [
+        {
+          tag: '#region>',
+          color: '#9d78e0',
+          strikethrough: false,
+          underline: true,
+          bold: true,
+          italic: true
+        },
+        {
+          tag: '#endregion',
+          color: '#4f3c73',
+          strikethrough: false,
+          underline: false,
+          bold: true,
+          italic: true
+        },
+        {
+          tag: '#region->',
+          color: '#e0b000',
+          strikethrough: false,
+          underline: true,
+          bold: true,
+          italic: false
+        },
+        {
+          tag: '#endregion.',
+          color: '#5c4801',
+          strikethrough: false,
+          underline: false,
+          bold: true,
+          italic: false
+        },
+        {
+          tag: '!',
+          color: '#ff3333',
+          backgroundColor: 'transparent',
+          bold: false,
+          multilineComments: false
+        },
+        {
+          tag: '- !',
+          color: '#ff3333',
+          backgroundColor: 'transparent',
+          bold: false,
+          multilineComments: false
+        },
+        {
+          tag: '@deprecated',
+          color: '#ff3333',
+          backgroundColor: 'transparent',
+          bold: false,
+          multilineComments: true
+        },
+        {
+          tag: '@important',
+          color: '#00ddFF',
+          backgroundColor: 'transparent',
+          bold: true,
+          underline: false,
+          italic: false
+        },
+        {
+          tag: '?',
+          color: '#3498DB',
+          strikethrough: false,
+          underline: false,
+          backgroundColor: 'transparent',
+          bold: false,
+          italic: false
+        },
+        {
+          tag: 'x--',
+          color: '#474747',
+          strikethrough: true,
+          underline: false,
+          backgroundColor: 'transparent',
+          bold: false,
+          italic: false
+        },
+        {
+          tag: 'todo',
+          color: '#FF8C00',
+          strikethrough: false,
+          underline: false,
+          backgroundColor: 'transparent',
+          bold: false,
+          italic: false
+        }
+      ],
+      'prettier.requireConfig': true,
+      'prettier.ignorePath': './.prettierignore',
+      'prettier.configPath': './.prettierrc',
+
+      'eslint.useFlatConfig': true
+    })
+});
+
+export { create };

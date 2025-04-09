@@ -1,0 +1,206 @@
+{
+  "definitions": {
+    "version": {
+      "$comment": "Version is a static property for consistent projection generation",
+      "description": "The current version number of the block, such as 1.0 or 1.0.3. It’s similar to how plugins are versioned. This field might be used with block assets to control cache invalidation, and when the block author omits it, then the installed version of WordPress is used instead.",
+      "type": "string"
+    },
+    "textdomain": {
+      "$comment": "Textdomain is assigned to the core configs slug value.",
+      "description": "The gettext text domain of the plugin/block. More information can be found in the Text Domain section of the How to Internationalize your Plugin page.\n\nhttps://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/",
+      "type": "string"
+    },
+    "apiVersion": {
+      "$comment": "API version is a static property for consistent projection generation",
+      "description": "The version of the Block API used by the block. The most recent version is 3 and it was introduced in WordPress 6.3.\n\n See the API versions documentation at https://developer.wordpress.org/block-editor/reference-guides/block-api/block-api-versions/ for more details.",
+      "type": "integer",
+      "enum": [1, 2, 3],
+      "default": 1
+    },
+    "name": {
+      "$comment": "Name is created by combining the namespace and slug provided by the core config.",
+      "description": "The name for a block is a unique string that identifies a block. Names have to be structured as `namespace/block-name`, where namespace is the name of your plugin or theme.",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*/[a-z][a-z0-9-]*$"
+    },
+    "title": {
+      "$comment": "Provided by the core config.",
+      "description": "This is the display title for your block, which can be translated with our translation functions. The block inserter will show this name.",
+      "type": "string"
+    },
+    "description": {
+      "$comment": "Provided by the core config.",
+      "description": "This is a short description for your block, which can be translated with our translation functions. This will be shown in the block inspector.",
+      "type": "string"
+    },
+    "files": {
+      "$comment": "Internally handled as static properties.",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Block Files",
+      "description": "Block type files definition.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "editorScript": {
+          "description": "Block type editor script definition. It will only be enqueued in the context of the editor.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "script": {
+          "description": "Block type frontend and editor script definition. It will be enqueued both in the editor and when viewing the content on the front of the site.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "viewScript": {
+          "description": "Block type frontend script definition. It will be enqueued only when viewing the content on the front of the site.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "viewScriptModule": {
+          "description": "Block type frontend script module definition. It will be enqueued only when viewing the content on the front of the site.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "editorStyle": {
+          "description": "Block type editor style definition. It will only be enqueued in the context of the editor.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "viewStyle": {
+          "description": "Block type frontend style definition. It will be enqueued only when viewing the content on the front of the site.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "render": {
+          "description": "Template file loaded on the server when rendering a block.",
+          "type": "string"
+        },
+        "style": {
+          "description": "Block type frontend style definition. It will be enqueued both in the editor and when viewing the content on the front of the site.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        }
+      }
+    }
+  },
+
+  "$comment": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+  "$id": "https://schemas.wp.org/trunk/block.json",
+  "title": "WordPress block.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "attributes": { "$ref": "./attributes.schema.json" },
+    "supports": { "$ref": "./supports.schema.json" },
+    "selectors": { "$ref": "./selectors.schema.json" },
+    "variations": { "$ref": "./variations.schema.json" },
+
+    "__experimental": {
+      "description": "The name of the experiment this block is a part of, or boolean true if there is no specific experiment name.",
+      "anyOf": [{ "type": "string" }, { "type": "boolean" }]
+    },
+    "category": {
+      "description": "Blocks are grouped into categories to help users browse and discover them.\n Core provided categories are: text, media, design, widgets, theme, embed\n\nPlugins and Themes can also register custom block categories.\n\nhttps://developer.wordpress.org/block-editor/reference-guides/filters/block-filters/#managing-block-categories",
+      "anyOf": [
+        { "type": "string" },
+        {
+          "type": "string",
+          "enum": ["text", "media", "design", "widgets", "theme", "embed"]
+        }
+      ]
+    },
+    "parent": {
+      "description": "Setting parent lets a block require that it is only available when nested within the specified blocks. For example, you might want to allow an ‘Add to Cart’ block to only be available within a ‘Product’ block.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "ancestor": {
+      "description": "The `ancestor` property makes a block available inside the specified block types at any position of the ancestor block subtree. That allows, for example, to place a ‘Comment Content’ block inside a ‘Column’ block, as long as ‘Column’ is somewhere within a ‘Comment Template’ block.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "allowedBlocks": {
+      "description": "The `allowedBlocks` property specifies that only the listed block types can be the children of this block. For example, a ‘List’ block allows only ‘List Item’ blocks as direct children.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "icon": {
+      "description": "An icon property should be specified to make it easier to identify a block. These can be any of WordPress’ Dashicons (slug serving also as a fallback in non-js contexts).",
+      "type": "string"
+    },
+    "keywords": {
+      "description": "Sometimes a block could have aliases that help users discover it while searching. For example, an image block could also want to be discovered by photo. You can do so by providing an array of unlimited terms (which are translated).",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "providesContext": {
+      "description": "Context provided for available access by descendants of blocks of this type, in the form of an object which maps a context name to one of the block’s own attribute.\n\nSee the block context documentation at https://developer.wordpress.org/block-editor/reference-guides/block-api/block-context/ for more details.",
+      "type": "object",
+      "patternProperties": { "[a-zA-Z]": { "type": "string" } }
+    },
+    "usesContext": {
+      "description": "Array of the names of context values to inherit from an ancestor provider.\n\nSee the block context documentation at https://developer.wordpress.org/block-editor/reference-guides/block-api/block-context/ for more details.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "styles": {
+      "description": "Block styles can be used to provide alternative styles to block. It works by adding a class name to the block’s wrapper. Using CSS, a theme developer can target the class name for the block style if it is selected.\n\nPlugins and Themes can also register custom block style for existing blocks.\n\nhttps://developer.wordpress.org/block-editor/reference-guides/block-api/block-styles",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "label": { "type": "string" },
+          "isDefault": { "type": "boolean", "default": false }
+        },
+        "required": ["name", "label"],
+        "additionalProperties": false
+      }
+    },
+    "example": {
+      "description": "It provides structured example data for the block. This data is used to construct a preview for the block to be shown in the Inspector Help Panel when the user mouses over the block.\n\nSee the example documentation at https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/#example-optional for more details.",
+      "type": "object",
+      "properties": {
+        "viewportWidth": {
+          "description": "The viewportWidth controls the width of the iFrame container in which the block preview will get rendered",
+          "type": "number",
+          "default": 1200
+        },
+        "attributes": {
+          "description": "Set the attributes for the block example",
+          "type": "object"
+        },
+        "innerBlocks": {
+          "description": "Set the inner blocks that should be used within the block example. The blocks should be defined as a nested array like this:\n\n[ { \"name\": \"core/heading\", \"attributes\": { \"content\": \"This is an Example\" } } ]\n\nWhere each block itself is an object that contains the block name, the block attributes, and the blocks inner blocks.",
+          "type": "array"
+        }
+      }
+    },
+    "blockHooks": {
+      "description": "Block Hooks allow a block to automatically insert itself next to all instances of a given block type.\n\nSee the Block Hooks documentation at https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/#block-hooks-optional for more details.",
+      "type": "object",
+      "patternProperties": {
+        "^[a-z][a-z0-9-]*/[a-z][a-z0-9-]*$": {
+          "type": "string",
+          "enum": ["before", "after", "firstChild", "lastChild"]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

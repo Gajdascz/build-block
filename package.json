@@ -1,0 +1,111 @@
+{
+  "name": "@toolbox-wp/build-block",
+  "version": "0.1.12",
+  "description": "A build tool for generating a modern development environment for a WordPress block plugin similar to [@wordpress/create-block](https://www.npmjs.com/package/@wordpress/create-block).",
+  "keywords": [
+    "build-block",
+    "wordpress",
+    "wordpress-block",
+    "wordpress-plugin",
+    "wordpress-development",
+    "wordpress-interactivity-api",
+    "wp",
+    "wp-block",
+    "wp-scripts",
+    "wp-env",
+    "block",
+    "block-editor",
+    "gutenberg",
+    "typescript",
+    "typescript-eslint",
+    "eslint",
+    "prettier"
+  ],
+  "author": "Nolan Gajdascz",
+  "license": "GPLv2+",
+  "repository": "https://github.com/Gajdascz/build-block",
+  "main": "build/index.js",
+  "type": "module",
+  "bin": {
+    "build-block": "bin/build-block.js"
+  },
+  "scripts": {
+    "test": "vitest",
+    "build": "tsc",
+    "lint": "eslint . --fix --config eslint.config.ts",
+    "format": "prettier --write --config .prettierrc .",
+    "clean:code": "pnpm run lint && pnpm run format",
+    "clean:repo": "rm -rf build && rm -rf .cache/",
+    "rebuild": "pnpm run clean:repo && pnpm run build",
+    "depgraph": "npx depcruise src --no-config --include-only \"^src\" --output-type dot | dot -T svg > dependency-graph.svg",
+    "prepublishOnly": "pnpm run rebuild",
+    "version:patch": "pnpm version patch --no-git-tag-version",
+    "version:minor": "pnpm version minor --no-git-tag-version",
+    "version:major": "pnpm version major --no-git-tag-version",
+    "commit": "git add . && git commit",
+    "push": "git push origin main",
+    "commit:push": "pnpm run commit && pnpm run push",
+    "release:patch": "pnpm version:patch && pnpm run commit:push && pnpm run publish:patch"
+  },
+  "files": [
+    "bin/**",
+    "build/**",
+    "LICENSE"
+  ],
+  "types": "./build/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./build/index.d.ts",
+      "import": "./build/index.js"
+    }
+  },
+  "dependencies": {
+    "@types/wordpress__block-editor": "^11.5.16",
+    "@types/wordpress__blocks": "^12.5.17",
+    "@wordpress/block-editor": "^14.16.0",
+    "@wordpress/blocks": "^12.35.0",
+    "commander": "^13.1.0",
+    "jiti": "^2.4.2",
+    "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.26.9",
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.24.0",
+    "@microsoft/tsdoc-config": "^0.17.1",
+    "@types/node": "^22.14.0",
+    "@types/prompts": "^2.4.9",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.1",
+    "@vitest/coverage-v8": "3.0.9",
+    "@wordpress/components": "^29.7.0",
+    "@wordpress/element": "^6.21.0",
+    "@wordpress/eslint-plugin": "^22.7.0",
+    "@wordpress/i18n": "^5.21.0",
+    "@wordpress/icons": "^10.21.0",
+    "@wordpress/interactivity": "^6.21.0",
+    "@wordpress/scripts": "^30.14.1",
+    "@wordpress/stylelint-config": "^23.13.0",
+    "dependency-cruiser": "^16.10.1",
+    "eslint": "^9.24.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-import-resolver-typescript": "^4.3.2",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-tsdoc": "^0.4.0",
+    "memfs": "^4.17.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.29.1",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.1.1"
+  },
+  "imports": {
+    "#config": "./build/core/config/index.js",
+    "#validator": "./build/core/validator/index.js",
+    "#utils": "./build/core/utils/index.js",
+    "#constants": "./build/core/constants/index.js",
+    "#templates": "./build/core/templates/index.js",
+    "#_prompts": "./build/core/prompts/index.js"
+  },
+  "packageManager": "pnpm@10.8.0+sha512.0e82714d1b5b43c74610193cb20734897c1d00de89d0e18420aebc5977fa13d780a9cb05734624e81ebd81cc876cd464794850641c48b9544326b5622ca29971"
+}

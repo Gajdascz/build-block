@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NPM Plugin Configuration",
+  "type": "object",
+  "required": [],
+  "additionalProperties": false,
+  "properties": {
+    "classScope": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]+$",
+      "minLength": 5,
+      "description": "Used when generating PHP entry file."
+    },
+    "methodScope": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "minLength": 5,
+      "description": "Used in PHP files."
+    }
+  }
+}

@@ -1,0 +1,13 @@
+# Directories
+build/
+dist/
+node_modules/
+vendor/
+coverage/
+.cache/
+
+# Files
+**/*.md
+*.php
+.DS_Store
+*.env

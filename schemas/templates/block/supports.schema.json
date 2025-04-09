@@ -1,0 +1,394 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "https://developer.wordpress.org/block-editor/reference-guides/block-api/block-supports/",
+  "title": "Block Supports",
+  "description": "Contains as set of options to control features used in the editor. See the supports documentation at https://developer.wordpress.org/block-editor/reference-guides/block-api/block-supports/ for more details.",
+  "type": "object",
+  "definitions": {
+    "interactivity": {
+      "$comment": "Removed from available options because this generator enforces the use of Interactivity API.",
+      "description": "Indicates if the block is using Interactivity API features.",
+      "oneOf": [
+        {
+          "description": "Indicates whether the block is using the Interactivity API directives.",
+          "type": "boolean",
+          "default": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "clientNavigation": {
+              "description": "Indicates whether a block is compatible with the Interactivity API client-side navigation.\n\nSet it to true only if the block is not interactive or if it is interactive using the Interactivity API. Set it to false if the block is interactive but uses vanilla JS, jQuery or another JS framework/library other than the Interactivity API.",
+              "type": "boolean",
+              "default": false
+            },
+            "interactive": {
+              "description": "Indicates whether the block is using the Interactivity API directives.",
+              "type": "boolean",
+              "default": false
+            }
+          }
+        }
+      ]
+    }
+  },
+  "additionalProperties": true,
+  "properties": {
+    "anchor": {
+      "description": "Anchors let you link directly to a specific block on a page. This property adds a field to define an id for the block and a button to copy the direct link.",
+      "type": "boolean",
+      "default": false
+    },
+    "align": {
+      "description": "This property adds block controls which allow to change block’s alignment.",
+      "oneOf": [
+        { "type": "boolean" },
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["wide", "full", "left", "center", "right"]
+          }
+        }
+      ],
+      "default": false
+    },
+    "alignWide": {
+      "description": "This property allows to enable wide alignment for your theme. To disable this behavior for a single block, set this flag to false.",
+      "type": "boolean",
+      "default": true
+    },
+    "ariaLabel": {
+      "description": "ARIA-labels let you define an accessible label for elements. This property allows enabling the definition of an aria-label for the block, without exposing a UI field.",
+      "type": "boolean",
+      "default": false
+    },
+    "className": {
+      "description": "By default, the class .wp-block-your-block-name is added to the root element of your saved markup. This helps having a consistent mechanism for styling blocks that themes and plugins can rely on. If, for whatever reason, a class is not desired on the markup, this functionality can be disabled.",
+      "type": "boolean",
+      "default": true
+    },
+    "color": {
+      "description": "This value signals that a block supports some of the properties related to color. When it does, the block editor will show UI controls for the user to set their values.\n\nNote that the background and text keys have a default value of true, so if the color property is present they’ll also be considered enabled",
+      "type": "object",
+      "properties": {
+        "background": {
+          "description": "This property adds UI controls which allow the user to apply a solid background color to a block.\n\nWhen color support is declared, this property is enabled by default (along with text), so simply setting color will enable background color.\n\nTo disable background support while keeping other color supports enabled, set to false.\n\nWhen the block declares support for color.background, its attributes definition is extended to include two new attributes: backgroundColor and style",
+          "type": "boolean",
+          "default": true
+        },
+        "gradients": {
+          "description": "This property adds UI controls which allow the user to apply a gradient background to a block.\n\nGradient presets are sourced from editor-gradient-presets theme support.\n\nWhen the block declares support for color.gradient, its attributes definition is extended to include two new attributes: gradient and style",
+          "type": "boolean",
+          "default": false
+        },
+        "link": {
+          "description": "This property adds block controls which allow the user to set link color in a block, link color is disabled by default.\n\nLink color presets are sourced from the editor-color-palette theme support.\n\nWhen the block declares support for color.link, its attributes definition is extended to include the style attribute",
+          "type": "boolean",
+          "default": false
+        },
+        "text": {
+          "description": "This property adds block controls which allow the user to set text color in a block.\n\nWhen color support is declared, this property is enabled by default (along with background), so simply setting color will enable text color.\n\nText color presets are sourced from the editor-color-palette theme support.\n\nWhen the block declares support for color.text, its attributes definition is extended to include two new attributes: textColor and style",
+          "type": "boolean",
+          "default": true
+        },
+        "heading": {
+          "description": "This property adds block controls which allow the user to set heading colors in a block. Heading color is disabled by default.\n\nHeading color presets are sourced from the editor-color-palette theme support.\n\nWhen the block declares support for color.heading, its attributes definition is extended to include the style attribute",
+          "type": "boolean",
+          "default": false
+        },
+        "button": {
+          "description": "This property adds block controls which allow the user to set button colors in a block. Button color is disabled by default.\n\nButton color presets are sourced from the editor-color-palette theme support.\n\nWhen the block declares support for color.button, its attributes definition is extended to include the style attribute",
+          "type": "boolean",
+          "default": false
+        },
+        "enableContrastChecker": {
+          "description": "Determines whether the contrast checker widget displays in the block editor UI.\n\nThe contrast checker appears only if the block declares support for color. It tests the readability of color combinations and warns if there is a potential issue. The property is enabled by default.\n\nSet to `false` to explicitly disable.",
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "customClassName": {
+      "description": "This property adds a field to define a custom className for the block’s wrapper.",
+      "type": "boolean",
+      "default": true
+    },
+    "dimensions": {
+      "description": "This value signals that a block supports some of the CSS style properties related to dimensions. When it does, the block editor will show UI controls for the user to set their values if the theme declares support.\n\nWhen the block declares support for a specific dimensions property, its attributes definition is extended to include the style attribute.",
+      "type": "object",
+      "properties": {
+        "aspectRatio": {
+          "description": "Allow blocks to define an aspect ratio value.",
+          "type": "boolean",
+          "default": false
+        },
+        "minHeight": {
+          "description": "Allow blocks to define a minimum height value.",
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "filter": {
+      "description": "This value signals that a block supports some of the properties related to filters. When it does, the block editor will show UI controls for the user to set their values if the theme declares support.\n\nWhen the block declares support for a specific filter property, its attributes definition is extended to include the style attribute.",
+      "type": "object",
+      "properties": {
+        "duotone": {
+          "description": "Allow blocks to define a duotone filter.",
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "background": {
+      "description": "This value signals that a block supports some of the CSS style properties related to background. When it does, the block editor will show UI controls for the user to set their values if the theme declares support.\n\nWhen the block declares support for a specific background property, its attributes definition is extended to include the style attribute.",
+      "type": "object",
+      "properties": {
+        "backgroundImage": {
+          "description": "Allow blocks to define a background image.",
+          "type": "boolean",
+          "default": false
+        },
+        "backgroundSize": {
+          "description": "Allow blocks to define values related to the size of a background image, including size, position, and repeat controls",
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "html": {
+      "description": "By default, a block’s markup can be edited individually. To disable this behavior, set html to false.",
+      "type": "boolean",
+      "default": true
+    },
+    "inserter": {
+      "description": "By default, all blocks will appear in the inserter, block transforms menu, Style Book, etc. To hide a block from all parts of the user interface so that it can only be inserted programmatically, set inserter to false.",
+      "type": "boolean",
+      "default": true
+    },
+    "renaming": {
+      "description": "By default, a block can be renamed by a user from the block 'Options' dropdown or the 'Advanced' panel. To disable this behavior, set renaming to false.",
+      "type": "boolean",
+      "default": true
+    },
+    "layout": {
+      "description": "This value only applies to blocks that are containers for inner blocks. If set to `true` the layout type will be `flow`. For other layout types it's necessary to set the `type` explicitly inside the `default` object.",
+      "oneOf": [
+        { "type": "boolean" },
+        {
+          "type": "object",
+          "properties": {
+            "default": {
+              "description": "Allows setting the `type` property to define what layout type is default for the block, and also default values for any properties inherent to that layout type, e.g., for a `flex` layout, a default value can be set for `flexWrap`.",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "description": "The layout type.",
+                  "type": "string",
+                  "enum": ["constrained", "grid", "flex"]
+                },
+                "contentSize": {
+                  "description": "The content size used on all children.",
+                  "type": "string"
+                },
+                "wideSize": {
+                  "description": "The wide size used on alignwide children.",
+                  "type": "string"
+                },
+                "justifyContent": {
+                  "description": "Content justification value.",
+                  "type": "string",
+                  "enum": [
+                    "right",
+                    "center",
+                    "space-between",
+                    "left",
+                    "stretch"
+                  ]
+                },
+                "orientation": {
+                  "description": "The orientation of the layout.",
+                  "type": "string",
+                  "enum": ["horizontal", "vertical"]
+                },
+                "flexWrap": {
+                  "description": "The flex wrap value.",
+                  "type": "string",
+                  "enum": ["wrap", "nowrap"]
+                },
+                "verticalAlignment": {
+                  "description": "The vertical alignment value.",
+                  "type": "string",
+                  "enum": [
+                    "top",
+                    "center",
+                    "bottom",
+                    "space-between",
+                    "stretch"
+                  ]
+                },
+                "minimumColumnWidth": {
+                  "description": "The minimum column width value.",
+                  "type": "string"
+                },
+                "columnCount": {
+                  "description": "The column count value.",
+                  "type": "number"
+                }
+              }
+            },
+            "allowSwitching": {
+              "description": "Exposes a switcher control that allows toggling between all existing layout types.",
+              "type": "boolean",
+              "default": false
+            },
+            "allowEditing": {
+              "description": "Determines display of layout controls in the block sidebar. If set to false, layout controls will be hidden.",
+              "type": "boolean",
+              "default": true
+            },
+            "allowInheriting": {
+              "description": "For the `flow` layout type only, determines display of the `Inner blocks use content width` toggle.",
+              "type": "boolean",
+              "default": true
+            },
+            "allowSizingOnChildren": {
+              "description": "For the `flex` layout type only, determines display of sizing controls (Fit/Fill/Fixed) on all child blocks of the flex block.",
+              "type": "boolean",
+              "default": false
+            },
+            "allowVerticalAlignment": {
+              "description": "For the `flex` layout type only, determines display of vertical alignment controls in the block toolbar.",
+              "type": "boolean",
+              "default": true
+            },
+            "allowJustification": {
+              "description": "For the `flex` layout type, determines display of justification controls in the block toolbar and block sidebar. For the `constrained` layout type, determines display of justification control in the block sidebar.",
+              "type": "boolean",
+              "default": true
+            },
+            "allowOrientation": {
+              "description": "For the `flex` layout type only, determines display of the orientation control in the block toolbar.",
+              "type": "boolean",
+              "default": true
+            },
+            "allowCustomContentAndWideSize": {
+              "description": "For the `constrained` layout type only, determines display of the custom content and wide size controls in the block sidebar.",
+              "type": "boolean",
+              "default": true
+            }
+          }
+        }
+      ],
+      "default": false
+    },
+    "multiple": {
+      "description": "A non-multiple block can be inserted into each post, one time only. For example, the built-in ‘More’ block cannot be inserted again if it already exists in the post being edited. A non-multiple block’s icon is automatically dimmed (unclickable) to prevent multiple instances.",
+      "type": "boolean",
+      "default": true
+    },
+    "reusable": {
+      "description": "A block may want to disable the ability of being converted into a reusable block. By default all blocks can be converted to a reusable block. If supports reusable is set to false, the option to convert the block into a reusable block will not appear.",
+      "type": "boolean",
+      "default": true
+    },
+    "lock": {
+      "description": "A block may want to disable the ability to toggle the lock state. It can be locked/unlocked by a user from the block 'Options' dropdown by default. To disable this behavior, set lock to false.",
+      "type": "boolean",
+      "default": true
+    },
+    "position": {
+      "description": "This value signals that a block supports some of the CSS style properties related to position. When it does, the block editor will show UI controls for the user to set their values if the theme declares support.\n\nWhen the block declares support for a specific position property, its attributes definition is extended to include the style attribute.",
+      "type": "object",
+      "properties": {
+        "sticky": {
+          "description": "Allow blocks to stick to their immediate parent when scrolling the page.",
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "spacing": {
+      "description": "This value signals that a block supports some of the CSS style properties related to spacing. When it does, the block editor will show UI controls for the user to set their values if the theme declares support.\n\nWhen the block declares support for a specific spacing property, its attributes definition is extended to include the style attribute.",
+      "type": "object",
+      "properties": {
+        "margin": {
+          "oneOf": [
+            { "type": "boolean" },
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["top", "right", "left", "bottom"]
+              }
+            },
+            {
+              "type": "array",
+              "items": { "type": "string", "enum": ["vertical", "horizontal"] }
+            }
+          ]
+        },
+        "padding": {
+          "oneOf": [
+            { "type": "boolean" },
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["top", "right", "left", "bottom"]
+              }
+            },
+            {
+              "type": "array",
+              "items": { "type": "string", "enum": ["vertical", "horizontal"] }
+            }
+          ]
+        }
+      }
+    },
+    "shadow": {
+      "description": "Allow blocks to define a box shadow.",
+      "oneOf": [
+        {
+          "description": "Defines whether a box shadow is enabled or not.",
+          "type": "boolean"
+        },
+        { "type": "object" }
+      ],
+      "default": false
+    },
+    "typography": {
+      "description": "This value signals that a block supports some of the CSS style properties related to typography. When it does, the block editor will show UI controls for the user to set their values if the theme declares support.\n\nWhen the block declares support for a specific typography property, its attributes definition is extended to include the style attribute.",
+      "type": "object",
+      "properties": {
+        "fontSize": {
+          "description": "This value signals that a block supports the font-size CSS style property. When it does, the block editor will show an UI control for the user to set its value.\n\nThe values shown in this control are the ones declared by the theme via the editor-font-sizes theme support, or the default ones if none is provided.\n\nWhen the block declares support for fontSize, its attributes definition is extended to include two new attributes: fontSize and style",
+          "type": "boolean",
+          "default": false
+        },
+        "lineHeight": {
+          "description": "This value signals that a block supports the line-height CSS style property. When it does, the block editor will show an UI control for the user to set its value if the theme declares support.\n\nWhen the block declares support for lineHeight, its attributes definition is extended to include a new attribute style of object type with no default assigned. It stores the custom value set by the user. The block can apply a default style by specifying its own style attribute with a default",
+          "type": "boolean",
+          "default": false
+        },
+        "textAlign": {
+          "description": "This property adds block toolbar controls which allow to change block's text alignment.",
+          "oneOf": [
+            { "type": "boolean" },
+            {
+              "type": "array",
+              "items": { "type": "string", "enum": ["left", "center", "right"] }
+            }
+          ],
+          "default": false
+        }
+      }
+    },
+    "splitting": {
+      "description": "This property indicates whether the block can split when the Enter key is pressed or when blocks are pasted.",
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

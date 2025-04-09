@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WordPress Core Configuration",
+  "type": "object",
+  "required": [],
+  "additionalProperties": false,
+  "properties": {
+    "contributors": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": { "type": "string", "description": "Contributor's name" }
+      },
+      "description": "List of contributors to the plugin."
+    },
+    "requiresPlugins": {
+      "type": "array",
+      "items": { "type": "string", "description": "List of required plugins." },
+      "description": "List of required plugins."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "List of tags for the plugin."
+      },
+      "description": "List of tags for the plugin."
+    },
+    "updateUrl": { "type": "string", "description": "URL for plugin updates." }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "https://developer.wordpress.org/block-editor/reference-guides/block-api/block-selectors/",
+  "title": "Block Selectors",
+  "description": "Provides custom CSS selectors and mappings for the block. Selectors may be set for the block itself or per-feature e.g. typography. Custom selectors per feature or sub-feature, allow different block styles to be applied to different elements within the block. See the selectors documentation at https://developer.wordpress.org/block-editor/reference-guides/block-api/block-selectors/",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "root": {
+      "description": "The primary CSS class to apply to the block. This replaces the `.wp-block-name` class if set.",
+      "type": "string"
+    },
+    "border": {
+      "description": "Custom CSS selector used to generate rules for the block's theme.json border styles.",
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "properties": {
+            "root": { "type": "string" },
+            "color": { "type": "string" },
+            "radius": { "type": "string" },
+            "style": { "type": "string" },
+            "width": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "color": {
+      "description": "Custom CSS selector used to generate rules for the block's theme.json color styles.",
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "properties": {
+            "root": { "type": "string" },
+            "text": { "type": "string" },
+            "background": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "dimensions": {
+      "description": "Custom CSS selector used to generate rules for the block's theme.json dimensions styles.",
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "properties": {
+            "root": { "type": "string" },
+            "aspectRatio": { "type": "string" },
+            "minHeight": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "spacing": {
+      "description": "Custom CSS selector used to generate rules for the block's theme.json spacing styles.",
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "properties": {
+            "root": { "type": "string" },
+            "blockGap": { "type": "string" },
+            "padding": { "type": "string" },
+            "margin": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "typography": {
+      "description": "Custom CSS selector used to generate rules for the block's theme.json typography styles.",
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "properties": {
+            "root": { "type": "string" },
+            "fontFamily": { "type": "string" },
+            "fontSize": { "type": "string" },
+            "fontStyle": { "type": "string" },
+            "fontWeight": { "type": "string" },
+            "lineHeight": { "type": "string" },
+            "letterSpacing": { "type": "string" },
+            "textDecoration": { "type": "string" },
+            "textTransform": { "type": "string" }
+          }
+        }
+      ]
+    }
+  }
+}

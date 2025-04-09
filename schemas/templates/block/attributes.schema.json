@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "https://developer.wordpress.org/block-editor/reference-guides/block-api/block-attributes/",
+  "title": "Block Attributes",
+  "description": "Attributes provide the structured data needs of a block. They can exist in different forms when they are serialized, but they are declared together under a common interface.\n\nSee the attributes documentation at https://developer.wordpress.org/block-editor/reference-guides/block-api/block-attributes/ for more details.",
+  "type": "object",
+  "additionalProperties": false,
+  "patternProperties": {
+    "[a-zA-Z]": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type indicates the type of data that is stored by the attribute. It does not indicate where the data is stored, which is defined by the source field.\n\nA type is required, unless an enum is provided. A type can be used with an enum.\n\nNote that the validity of an object is determined by your source. For an example, see the query details below.",
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "null",
+                "boolean",
+                "object",
+                "array",
+                "string",
+                "rich-text",
+                "integer",
+                "number"
+              ]
+            },
+            {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "null",
+                  "boolean",
+                  "object",
+                  "array",
+                  "string",
+                  "integer",
+                  "number"
+                ]
+              }
+            }
+          ]
+        },
+        "enum": {
+          "description": "An attribute can be defined as one of a fixed set of values. This is specified by an enum, which contains an array of allowed values:",
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "type": "boolean" },
+              { "type": "number" },
+              { "type": "string" }
+            ]
+          }
+        },
+        "source": {
+          "description": "Attribute sources are used to define how the attribute values are extracted from saved post content. They provide a mechanism to map from the saved markup to a JavaScript representation of a block.",
+          "type": "string",
+          "enum": [
+            "attribute",
+            "text",
+            "rich-text",
+            "html",
+            "raw",
+            "query",
+            "meta"
+          ]
+        },
+        "selector": {
+          "description": "The selector can be an HTML tag, or anything queryable with querySelector, such as a class or id attribute. Examples are given below.\n\nFor example, a selector of img will match an img element, and img.class will match an img element that has a class of class.",
+          "type": "string"
+        },
+        "attribute": {
+          "description": "Use an attribute source to extract the value from an attribute in the markup. The attribute is specified by the attribute field, which must be supplied.\n\nExample: Extract the src attribute from an image found in the block’s markup.",
+          "type": "string"
+        },
+        "query": {
+          "description": "Use query to extract an array of values from markup. Entries of the array are determined by the selector argument, where each matched element within the block will have an entry structured corresponding to the second argument, an object of attribute sources.",
+          "type": "object"
+        },
+        "meta": {
+          "description": "Although attributes may be obtained from a post’s meta, meta attribute sources are considered deprecated; EntityProvider and related hook APIs should be used instead, as shown in the Create Meta Block how-to here:\n\nhttps://developer.wordpress.org/block-editor/how-to-guides/metabox/#step-2-add-meta-block",
+          "type": "string"
+        },
+        "default": {
+          "description": "A block attribute can contain a default value, which will be used if the type and source do not match anything within the block content.\n\nThe value is provided by the default field, and the value should match the expected format of the attribute."
+        }
+      },
+      "anyOf": [{ "required": ["type"] }, { "required": ["enum"] }]
+    }
+  }
+}

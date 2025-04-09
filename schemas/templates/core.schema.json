@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Core Plugin Configuration",
+  "type": "object",
+  "required": ["namespace", "slug", "title"],
+  "additionalProperties": false,
+  "properties": {
+    "outputDirectory": {
+      "type": "string",
+      "description": "Output directory for the plugin. This is the directory where the plugin will be built."
+    },
+    "authorName": { "type": "string", "description": "Author name" },
+    "authorEmail": { "type": "string", "description": "Author email address" },
+    "authorUrl": { "type": "string", "description": "Author URL" },
+    "description": { "type": "string", "minLength": 5 },
+    "namespace": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "minLength": 5
+    },
+    "slug": { "type": "string", "pattern": "^[a-z0-9-]+$", "minLength": 5 },
+    "title": {
+      "type": "string",
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9\\s]+$",
+      "description": "Plugin human-readable title. It needs to contain at least 5 latin letters (a-Z) and/or numbers. (This is the display title for your block, which can be translated with our translation functions. The block inserter will show this name.)"
+    },
+    "funding": { "type": "string", "description": "Project funding link" },
+    "repository": {
+      "type": "string",
+      "description": "Project development repository"
+    }
+  }
+}
