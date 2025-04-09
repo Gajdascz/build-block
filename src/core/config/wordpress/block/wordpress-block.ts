@@ -198,12 +198,7 @@ export const { data, ops } = Base.createConfigModule<
     providesContext: {},
     styles: [],
     usesContext: [],
-    attributes: {
-      content: { type: 'string', default: '' },
-      alignment: { type: 'string', default: 'left' },
-      backgroundColor: { type: 'string', default: '#ffffff' },
-      showDetails: { type: 'boolean', default: false }
-    },
+    attributes: {},
     name: '',
     textdomain: ''
   },

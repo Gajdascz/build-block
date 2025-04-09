@@ -1,6 +1,6 @@
 {
   "name": "@toolbox-wp/build-block",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "A build tool for generating a modern development environment for a WordPress block plugin similar to [@wordpress/create-block](https://www.npmjs.com/package/@wordpress/create-block).",
   "keywords": [
     "build-block",

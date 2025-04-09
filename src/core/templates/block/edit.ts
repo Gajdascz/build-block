@@ -48,66 +48,14 @@ export default function Edit({
   attributes,
   setAttributes
 }: BlockEditProps<BlockAttributes>) {
-  const { 
-    content = '',
-    alignment = 'left',
-    backgroundColor = '#ffffff',
-    showDetails = false,
-  } = attributes;
-
   const blockProps = useBlockProps({
     style: { textAlign: alignment as React.CSSProperties['textAlign'], backgroundColor }
   });
   return (
-    <>
       <InspectorControls>
         <PanelBody title={__('Basic Settings', '${slug}')} initialOpen={true}>
-          <TextControl
-            label={__('Content','${slug}')}
-            value={content}
-            onChange={(value) => setAttributes({ content: value })}
-            help={__('Enter the main content for this block','${slug}')}
-          />
-          
-          <SelectControl
-            label={__('Text Alignment','${slug}')}
-            value={isBlockAlignmentType(alignment) ? alignment : 'left'}
-            options={[
-              { label: __('Left','${slug}'), value: 'left' },
-              { label: __('Center','${slug}'), value: 'center' },
-              { label: __('Right','${slug}'), value: 'right' }
-            ]}
-            onChange={(value) => setAttributes({ alignment: value })}
-          />
-          
-          <ToggleControl
-            label={__('Show Details','${slug}')}
-            checked={showDetails}
-            onChange={(value) => setAttributes({ showDetails: value })}
-            help={showDetails ? __('Showing details','${slug}') : __('Details hidden','${slug}')}
-          />
-          
-          <div className="${slug}-color-picker">
-            <p>{__('Background Color','${slug}')}</p>
-            <ColorPicker
-              color={backgroundColor}
-              onChange={(value) => setAttributes({ backgroundColor: value })}
-              enableAlpha
-            />
-          </div>
         </PanelBody>
       </InspectorControls>
-
-      <div {...blockProps}>
-        <p className="${slug}-content">{content || __('Add content...','${slug}')}</p>
-        
-        {showDetails && (
-          <div className="${slug}-details">
-            {__('Additional details shown here','${slug}')}
-          </div>
-        )}
-      </div>
-    </>
   );
 }
 `
