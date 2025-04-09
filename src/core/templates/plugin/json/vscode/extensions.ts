@@ -9,7 +9,6 @@ const create = (): ConfiguredTemplate => ({
         'aaron-bond.better-comments',
         'dbaeumer.vscode-eslint',
         'esbenp.prettier-vscode',
-        'PKief.material-icon-theme',
         'mxsdev.typescript-explorer'
       ]
     })
