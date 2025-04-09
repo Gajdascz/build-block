@@ -45,7 +45,7 @@
     "commit": "git add . && git commit",
     "push": "git push origin main",
     "commit:push": "pnpm run commit && pnpm run push",
-    "release:patch": "pnpm version:patch && pnpm run commit:push && pnpm run publish:patch"
+    "release:patch": "pnpm version:patch && pnpm run commit:push && pnpm publish"
   },
   "files": [
     "bin/**",
